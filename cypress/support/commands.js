@@ -1,6 +1,5 @@
-/// <reference types="cypress" />
 // ***********************************************
-// This example commands.ts shows you how to
+// This example commands.js shows you how to
 // create various custom commands and overwrite
 // existing commands.
 //
@@ -8,8 +7,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
+
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 
@@ -24,12 +22,11 @@ Cypress.Commands.add('login', (email = 'admin@example.com', password = 'password
 });
 
 // Custom command to select a language
-Cypress.Commands.add('selectLanguage', (language: 'en' | 'ar') => {
+Cypress.Commands.add('selectLanguage', (language) => {
   cy.get('[data-testid="language-switcher"]').click();
   cy.get(`[data-value="${language}"]`).click();
 });
 
-//
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
@@ -39,13 +36,4 @@ Cypress.Commands.add('selectLanguage', (language: 'en' | 'ar') => {
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      login(email?: string, password?: string): Chainable<void>
-      selectLanguage(language: 'en' | 'ar'): Chainable<void>
-    }
-  }
-}
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... }) 
