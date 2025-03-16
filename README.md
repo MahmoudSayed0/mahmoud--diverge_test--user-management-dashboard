@@ -18,6 +18,71 @@ A modern, accessible, and feature-rich dashboard for managing users built with V
 - **Accessibility Compliance (WCAG AA)**: Fully accessible interface with keyboard navigation support
 - **Form Validation**: Comprehensive form validation for user data
 
+## Development Standards
+
+### Clean Commit History
+This project maintains a clean and organized commit history following these practices:
+- Atomic commits that focus on a single change
+- Descriptive commit messages with a clear format: `type(scope): description`
+- Logical grouping of related changes
+- No merge conflicts or unnecessary merge commits
+- No commits with broken builds or failing tests
+
+### Documentation
+Documentation is comprehensive and exists at multiple levels:
+- **README.md**: Project overview, features, architecture decisions, and setup instructions
+- **Inline Code Comments**: Explanations for complex logic and algorithms
+- **Component Documentation**: Each component has a description of its purpose, props, and usage
+- **Type Definitions**: All TypeScript interfaces and types are well-documented
+- **API Documentation**: Clear documentation of API endpoints and data structures
+
+### TypeScript Usage
+TypeScript is used consistently throughout the project:
+- Strict type checking enabled in `tsconfig.json`
+- All components use TypeScript with proper type definitions
+- Custom type definitions for all data structures
+- No use of `any` type except where absolutely necessary
+- Proper typing of component props, emits, and function parameters/returns
+- Type guards and discriminated unions for complex type scenarios
+
+### Standard Commands
+The project uses standard npm/yarn commands for development:
+- `npm install` / `yarn`: Install dependencies
+- `npm run dev` / `yarn dev`: Start development server
+- `npm run build` / `yarn build`: Build for production
+- `npm run test` / `yarn test`: Run tests
+- `npm run lint` / `yarn lint`: Run linting
+- `npm run format` / `yarn format`: Format code with Prettier
+
+## Project Structure
+
+```
+user-management-dashboard/
+├── public/                  # Static assets
+├── src/
+│   ├── assets/              # CSS, images, and other assets
+│   ├── components/          # Reusable Vue components
+│   │   ├── ui/              # Base UI components
+│   │   └── user/            # User-specific components
+│   ├── lib/                 # Core libraries and utilities
+│   ├── plugins/             # Vue plugins (i18n, etc.)
+│   ├── router/              # Vue Router configuration
+│   ├── stores/              # Pinia stores
+│   ├── utils/               # Utility functions
+│   ├── views/               # Page components
+│   ├── App.vue              # Root component
+│   ├── main.ts              # Application entry point
+│   └── vite-env.d.ts        # TypeScript declarations
+├── .eslintrc.js             # ESLint configuration
+├── .gitignore               # Git ignore rules
+├── index.html               # HTML entry point
+├── package.json             # Project dependencies and scripts
+├── README.md                # Project documentation
+├── tailwind.config.js       # Tailwind CSS configuration
+├── tsconfig.json            # TypeScript configuration
+└── vite.config.ts           # Vite configuration
+```
+
 ## Technical Implementation
 
 ### User Management
