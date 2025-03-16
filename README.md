@@ -241,7 +241,7 @@ The UI would clearly indicate the current connection status and which operations
 ### Installation
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/user-management-dashboard.git
+git clone https://github.com/MahmoudSayed0/mahmoud--diverge_test--user-management-dashboard
 cd user-management-dashboard
 ```
 
