@@ -50,31 +50,93 @@ The project uses standard npm/yarn commands for development:
 - `npm install` / `yarn`: Install dependencies
 - `npm run dev` / `yarn dev`: Start development server
 - `npm run build` / `yarn build`: Build for production
-- `npm run test` / `yarn test`: Run tests
+- `npm run test` / `yarn test`: Run unit tests
+- `npm run test:watch` / `yarn test:watch`: Run tests in watch mode
+- `npm run test:coverage` / `yarn test:coverage`: Run tests with coverage
+- `npm run test:e2e` / `yarn test:e2e`: Run E2E tests in interactive mode
+- `npm run test:e2e:headless` / `yarn test:e2e:headless`: Run E2E tests in headless mode
 - `npm run lint` / `yarn lint`: Run linting
 - `npm run format` / `yarn format`: Format code with Prettier
+
+## End-to-End Testing
+
+The application includes comprehensive end-to-end tests using Cypress to ensure all features work correctly from a user's perspective. The tests cover:
+
+### Authentication
+- Login functionality with admin credentials
+- Redirect after successful login
+- Protected routes and authentication state
+
+### User Management Features
+- User table display and data loading
+- Filtering users by search terms, roles, and status
+- Sorting users by different columns
+- Pagination functionality
+- User creation, editing, and deletion
+
+### Internationalization
+- Language switching between English and Arabic
+- RTL layout for Arabic language
+- Proper translation of UI elements
+
+### Accessibility
+- ARIA attributes on interactive elements
+- Keyboard navigation support
+- Focus management
+- Skip links functionality
+
+### Export Functionality
+- CSV export of user data
+- PDF export of user data
+- Individual and bulk export options
+
+To run the E2E tests:
+```bash
+# Run tests in interactive mode (with UI)
+npm run test:e2e
+
+# Run tests in headless mode (for CI/CD)
+npm run test:e2e:headless
+```
 
 ## Project Structure
 
 ```
 user-management-dashboard/
+├── cypress/                 # E2E testing with Cypress
+│   ├── e2e/                 # E2E test specifications
+│   │   ├── basic.cy.js      # Basic application tests
+│   │   └── user-management.cy.js # User management tests
+│   ├── support/             # Test support files
+│   │   ├── commands.js      # Custom Cypress commands
+│   │   └── e2e.js           # E2E test configuration
+│   └── tsconfig.json        # TypeScript config for Cypress
 ├── public/                  # Static assets
 ├── src/
 │   ├── assets/              # CSS, images, and other assets
+│   │   ├── accessibility.css # Accessibility-specific styles
+│   │   └── index.css        # Main stylesheet
 │   ├── components/          # Reusable Vue components
 │   │   ├── ui/              # Base UI components
 │   │   └── user/            # User-specific components
+│   │       ├── UserFilters.vue # Filtering component
+│   │       ├── UserPagination.vue # Pagination component
+│   │       ├── UserTable.vue # User data table
+│   │       └── ExportMenu.vue # Export functionality
 │   ├── lib/                 # Core libraries and utilities
-│   ├── plugins/             # Vue plugins (i18n, etc.)
+│   ├── plugins/             # Vue plugins
+│   │   └── i18n.ts          # Internationalization setup
 │   ├── router/              # Vue Router configuration
 │   ├── stores/              # Pinia stores
 │   ├── utils/               # Utility functions
+│   │   └── exportUtils.ts   # Export functionality utilities
 │   ├── views/               # Page components
 │   ├── App.vue              # Root component
 │   ├── main.ts              # Application entry point
 │   └── vite-env.d.ts        # TypeScript declarations
 ├── .eslintrc.js             # ESLint configuration
 ├── .gitignore               # Git ignore rules
+├── cypress.config.js        # Cypress configuration
 ├── index.html               # HTML entry point
 ├── package.json             # Project dependencies and scripts
 ├── README.md                # Project documentation
@@ -158,9 +220,9 @@ On the technical side, I would implement a permission registry that maps capabil
 
 My testing strategy follows a comprehensive pyramid approach that balances coverage, confidence, and development speed:
 
-At the foundation, I focus on unit tests for pure functions, utilities, and composables that contain complex business logic. For example, the export utilities, filter logic, and pagination calculations would have high unit test coverage to ensure they work correctly in isolation. These tests run quickly and provide immediate feedback during development. For components, I prioritize testing complex interactive components like the UserFilters and UserTable, focusing on user interactions, state changes, and edge cases. I use component testing to verify that components render correctly with different props and respond appropriately to user actions.
+At the foundation, I focus on unit tests for pure functions, utilities, and composables that contain complex business logic. For example, the export utilities, filter logic, and pagination calculations have high unit test coverage to ensure they work correctly in isolation. These tests run quickly and provide immediate feedback during development. For components, I prioritize testing complex interactive components like the UserFilters and UserTable, focusing on user interactions, state changes, and edge cases. I use component testing to verify that components render correctly with different props and respond appropriately to user actions.
 
-For critical user flows like creating a user, editing user details, or exporting data, I implement integration tests that verify multiple components working together. These tests ensure that the components integrate properly and that data flows correctly through the application. Finally, I implement a smaller number of end-to-end tests for the most critical paths in the application, such as the complete user management workflow. These tests run in a real browser environment and verify that the application works as expected from the user's perspective. Throughout the testing process, I prioritize testing based on business impact, complexity, and likelihood of failure, ensuring that the most important aspects of the application are thoroughly tested.
+For critical user flows like creating a user, editing user details, or exporting data, I implement integration tests that verify multiple components working together. These tests ensure that the components integrate properly and that data flows correctly through the application. Finally, I've implemented end-to-end tests using Cypress for the most critical paths in the application, such as the complete user management workflow, authentication, filtering, sorting, and internationalization. These E2E tests run in a real browser environment and verify that the application works as expected from the user's perspective, including proper login functionality, data display, filtering capabilities, and accessibility features. Throughout the testing process, I prioritize testing based on business impact, complexity, and likelihood of failure, ensuring that the most important aspects of the application are thoroughly tested.
 
 ### 6. How would you handle offline capabilities in this application?
 
